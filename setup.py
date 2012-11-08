@@ -10,6 +10,8 @@ requires = [
     'pyramid', 
     'pyramid_debugtoolbar',
     'voteit.core',
+    'betahaus.viewcomponent',
+    'betahaus.pyracont',
     'lingua',
     'Babel',
     'colander',
