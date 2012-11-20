@@ -68,6 +68,8 @@ class CloneMeetingView(BaseEdit):
                 if k in ignore_attributes:
                     continue
                 new_obj.field_storage[k] = v
+            if hasattr(obj, '__tags__'):
+                new_obj.__tags__ = deepcopy(obj.__tags__)
             new_ai[obj.__name__] = new_obj
 
 
