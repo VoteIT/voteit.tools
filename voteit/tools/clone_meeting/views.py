@@ -36,7 +36,6 @@ class CloneMeetingView(BaseEdit):
             except deform.ValidationFailure, e: #pragma : no cover
                 self.response['form'] = e.render()
                 return self.response
-            #FIXME: Do stuff
             new_name = appstruct['new_name']
             new_meeting = createContent('Meeting', title = "Clone of %s" % self.context.title)
             self.api.root[new_name] = new_meeting
