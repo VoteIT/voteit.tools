@@ -45,7 +45,7 @@ class RecToDiscussionsView(BaseEdit):
             for (prop, rec) in proposals_and_rec:
                 if rec['text']:
                     created_discussion_posts += 1
-                    text = "%s\n%s" % (rec['text'], u"".join([u'#%s' % x for x in prop.get_tags()]))
+                    text = "%s\n%s" % (rec['text'], u" ".join([u'#%s' % x for x in prop.get_tags()]))
                     post = createContent('DiscussionPost', creators = [userid], text = text)
                     name = post.suggest_name(prop.__parent__)
                     prop.__parent__[name] = post
