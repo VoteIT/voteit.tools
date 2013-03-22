@@ -21,8 +21,9 @@ class RecToDiscussionsView(BaseEdit):
                  renderer = 'voteit.core.views:templates/base_edit.pt')
     def rec_to_discussions_form(self):
         """ Note: This is far from finished, don't use this unless you really know what you're doing! """
-        schema = createSchema('PopulateFromRecommendationsSchema').bind(context = self.context, request = self.request)
-        add_csrf_token(self.context, self.request, schema)  
+        schema = createSchema('PopulateFromRecommendationsSchema')
+        add_csrf_token(self.context, self.request, schema)
+        schema = schema.bind(context = self.context, request = self.request, api = self.api)
         form = deform.Form(schema, buttons=(button_save,))
         self.api.register_form_resources(form)
 
