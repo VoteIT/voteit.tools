@@ -1,7 +1,8 @@
 import colander
 import deform
-from pyramid.traversal import find_root
+from pyramid.traversal import find_interface
 from betahaus.pyracont.decorators import schema_factory
+from voteit.core.models.interfaces import IMeeting
 from voteit.core.schemas.permissions import deferred_autocompleting_userid_widget
 from voteit.core.validators import deferred_existing_userid_validator
 
@@ -11,8 +12,8 @@ from voteit.tools import ToolsMF as _
 @colander.deferred
 def deferred_groups_widget(node, kw):
     context = kw['context']
-    root = find_root(context)
-    groups = root.get('groups', {})
+    meeting = find_interface(context, IMeeting)
+    groups = meeting.get('groups', {})
     choices = []
     for (name, group) in groups.items():
         choices.append((name, group.title))

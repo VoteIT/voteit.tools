@@ -86,4 +86,3 @@ def menu_link(context, request, va, **kw):
     api = kw['api']
     url = request.resource_url(api.meeting, 'rec_to_discussions')
     return """<li><a href="%s">%s</a></li>""" % (url, api.translate(va.title))
-
