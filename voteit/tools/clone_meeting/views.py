@@ -23,11 +23,11 @@ class CloneMeetingView(BaseEdit):
                  renderer = 'voteit.core.views:templates/base_edit.pt')
     def clone_form(self):
         """ Note: This is far from finished, don't use this unless you really know what you're doing! """
-        schema = createSchema('CloneMeetingSchema').bind(context = self.context, request = self.request)
-        add_csrf_token(self.context, self.request, schema)  
+        schema = createSchema('CloneMeetingSchema')
+        add_csrf_token(self.context, self.request, schema)
+        schema = schema.bind(context = self.context, request = self.request)
         form = deform.Form(schema, buttons=(button_save, button_cancel,))
         self.api.register_form_resources(form)
-
         post = self.request.POST
         if 'save' in post:
             controls = post.items()
@@ -45,7 +45,6 @@ class CloneMeetingView(BaseEdit):
             self.process_meeting_structure(new_meeting, ignore_attributes)
             self.api.flash_messages.add(_(u"Cloned meeting"))
             return HTTPFound(location = self.request.resource_url(new_meeting))
-            
         self.response['form'] = form.render()
         return self.response
 
