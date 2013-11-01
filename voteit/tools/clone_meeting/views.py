@@ -25,7 +25,7 @@ class CloneMeetingView(BaseEdit):
         """ Note: This is far from finished, don't use this unless you really know what you're doing! """
         schema = createSchema('CloneMeetingSchema')
         add_csrf_token(self.context, self.request, schema)
-        schema = schema.bind(context = self.context, request = self.request)
+        schema = schema.bind(context = self.context, request = self.request, api = self.api)
         form = deform.Form(schema, buttons=(button_save, button_cancel,))
         self.api.register_form_resources(form)
         post = self.request.POST
